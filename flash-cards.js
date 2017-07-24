@@ -1,6 +1,10 @@
 //this is the controller and entry point file
 const inquirer = require( 'inquirer' );
 
+//card constructors
+const BasicCard = require( './basic-card' );
+const ClozeCard = require( './cloze-card' );
+
 //program start
 modePrompt();
 
@@ -75,9 +79,10 @@ function createCard()
             }
         ]).then( onBasicCardComplete );
 
-        function onBasicCardComplete()
+        function onBasicCardComplete( tAnswers )
         {
-
+            let tempBasicCard = new BasicCard( tAnswers.cardFront, tAnswers.cardBack );
+            console.log( tempBasicCard );
         }
     }
 
