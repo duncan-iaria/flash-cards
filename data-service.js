@@ -15,12 +15,12 @@ dataService.log = function( tMessage )
 
 dataService.readBasicCards = function()
 {
-    console.log( 'reading basic cards' );
+    readData( basicFilePath );
 }
 
 dataService.readClozeCards = function()
 {
-
+    readData( clozeFilePath );
 }
 
 dataService.writeBasicCards = function( tCard )
@@ -41,6 +41,9 @@ dataService.writeClozeCards = function( tCard )
     writeData( clozeFilePath, tempCardData );
 }
 
+//======================
+// PRIVATE FUNCTIONS
+//======================
 function writeData( tPath, tData )
 {
     fs.writeFile( tPath, tData, onWriteComplete );
@@ -54,6 +57,24 @@ function writeData( tPath, tData )
         else
         {
             dataService.log( 'jobs done!' );
+        }
+    }
+}
+
+function readData( tPath )
+{
+    fs.readFile( tPath, 'utf8', onReadComplete );
+
+    function onReadComplete( tError, tData )
+    {
+        if( tError )
+        {
+            dataService.log( 'there was an error when reading data: ' + tError );
+        }
+        else
+        {
+            dataService.log( tData );
+            return tData;
         }
     }
 }

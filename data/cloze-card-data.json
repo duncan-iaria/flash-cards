@@ -1,0 +1,11 @@
+[
+	{
+		"fullText": "Hello There",
+		"answer": "Hello"
+	},
+	{
+		"fullText": "sophie is the best dog",
+		"answer": "best",
+		"partialText": "sophie is the ... dog"
+	}
+]
