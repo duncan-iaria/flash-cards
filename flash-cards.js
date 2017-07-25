@@ -107,7 +107,7 @@ function createCard()
         function onClozeCardComplete( tAnswers )
         {
             let tempClozeCard = new ClozeCard( tAnswers.fullText, tAnswers.answer );
-            console.log( tempClozeCard );
+            //console.log( tempClozeCard );
 
             if( tempClozeCard.partialText != null )
             {

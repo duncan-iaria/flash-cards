@@ -56,7 +56,7 @@ function writeData( tPath, tData )
         }
         else
         {
-            dataService.log( 'jobs done!' );
+            dataService.log( '\nwriting card complete!' );
         }
     }
 }

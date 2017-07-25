@@ -1,18 +1,10 @@
 [
 	{
-		"front": "Hello",
-		"back": "Dolly"
+		"front": "Who is the best dog in the world?",
+		"back": "Sophie"
 	},
 	{
-		"cardFront": "wassup",
-		"tCardBack": "my dude"
-	},
-	{
-		"front": "sup",
-		"back": "mang"
-	},
-	{
-		"front": "Sophie",
-		"back": "Is the best dog"
+		"front": "Who is the second best dog in the world?",
+		"back": "Also Sophie"
 	}
 ]

@@ -17,6 +17,6 @@ ClozeCard.prototype.getPartialText = function()
         return null;
     }
 
-    console.log( tempPartial );
+    //console.log( tempPartial );
     return tempPartial;
 }
