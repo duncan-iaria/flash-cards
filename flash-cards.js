@@ -1,5 +1,6 @@
 //this is the controller and entry point file
 const inquirer = require( 'inquirer' );
+const data = require( './data-service' );
 
 //card constructors
 const BasicCard = require( './basic-card' );
@@ -82,7 +83,8 @@ function createCard()
         function onBasicCardComplete( tAnswers )
         {
             let tempBasicCard = new BasicCard( tAnswers.cardFront, tAnswers.cardBack );
-            console.log( tempBasicCard );
+            //console.log( tempBasicCard );
+            data.writeBasicCards( tempBasicCard );
         }
     }
 
@@ -102,9 +104,15 @@ function createCard()
             }
         ]).then( onClozeCardComplete );
 
-        function onClozeCardComplete()
+        function onClozeCardComplete( tAnswers )
         {
-            
+            let tempClozeCard = new ClozeCard( tAnswers.fullText, tAnswers.answer );
+            console.log( tempClozeCard );
+
+            if( tempClozeCard.partialText != null )
+            {
+                data.writeClozeCards( tempClozeCard );    
+            }
         }
     }
 }
@@ -114,5 +122,5 @@ function createCard()
 //======================
 function readCard()
 {
-
+    data.readBasicCards();
 }
