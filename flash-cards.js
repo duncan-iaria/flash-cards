@@ -107,7 +107,7 @@ function createCard()
         function onClozeCardComplete( tAnswers )
         {
             let tempClozeCard = new ClozeCard( tAnswers.fullText, tAnswers.answer );
-            console.log( tempClozeCard );
+            //console.log( tempClozeCard );
 
             if( tempClozeCard.partialText != null )
             {
@@ -122,5 +122,25 @@ function createCard()
 //======================
 function readCard()
 {
-    data.readBasicCards();
+    inquirer.prompt
+    ([
+        {
+            type: 'list',
+            name: 'readType',
+            message: 'Which type of card would you like to read?',
+            choices: [ 'basic-card', 'cloze-card' ]
+        },
+    ]).then( onReadTypeComplete );
+
+    function onReadTypeComplete( tAnswers )
+    {
+        if( tAnswers.readType === 'basic-card' )
+        {
+            data.readBasicCards();
+        }
+        else
+        {
+            data.readClozeCards();
+        }
+    }
 }
