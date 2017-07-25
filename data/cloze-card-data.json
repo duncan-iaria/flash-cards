@@ -8,5 +8,10 @@
 		"fullText": "Alien is a great movie!",
 		"answer": "great",
 		"partialText": "Alien is a ... movie!"
+	},
+	{
+		"fullText": "Duncan is a mediocre programmer.",
+		"answer": "mediocre",
+		"partialText": "Duncan is a ... programmer."
 	}
 ]

@@ -3,8 +3,8 @@ const inquirer = require( 'inquirer' );
 const data = require( './data-service' );
 
 //card constructors
-const BasicCard = require( './basic-card' );
-const ClozeCard = require( './cloze-card' );
+const BasicCard = require( './models/basic-card' );
+const ClozeCard = require( './models/cloze-card' );
 
 //program start
 modePrompt();
