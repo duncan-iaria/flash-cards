@@ -7,12 +7,12 @@ const BasicCard = require( './models/basic-card' );
 const ClozeCard = require( './models/cloze-card' );
 
 //program start
-modePrompt();
+init();
 
 //======================
 // INITIAL PROMPT
 //======================
-function modePrompt()
+function init()
 {
    inquirer.prompt
    ([
@@ -20,7 +20,7 @@ function modePrompt()
             type: 'list',
             name: 'mode',
             message: 'Would you like to create new flash cards, or read premade ones?',
-            choices: [ 'create-card', 'read-card' ]
+            choices: [ 'create-card', 'read-card', 'exit' ]
         }
     ]).then( onModePromptComplete );
 
@@ -30,9 +30,13 @@ function modePrompt()
         {
             createCard();
         }
-        else
+        else if( tAnswers.mode === 'read-card' )
         {
             readCard();
+        }
+        else
+        {
+            return;
         }
     } 
 }
@@ -83,8 +87,9 @@ function createCard()
         function onBasicCardComplete( tAnswers )
         {
             let tempBasicCard = new BasicCard( tAnswers.cardFront, tAnswers.cardBack );
-            //console.log( tempBasicCard );
-            data.writeBasicCards( tempBasicCard );
+
+            //pass in the card and then the callback when complete(start the program over essentially)
+            data.writeBasicCards( tempBasicCard, init );
         }
     }
 
@@ -107,11 +112,15 @@ function createCard()
         function onClozeCardComplete( tAnswers )
         {
             let tempClozeCard = new ClozeCard( tAnswers.fullText, tAnswers.answer );
-            //console.log( tempClozeCard );
 
+            //pass in the card and the callback if the partial text isn't null
             if( tempClozeCard.partialText != null )
             {
-                data.writeClozeCards( tempClozeCard );    
+                data.writeClozeCards( tempClozeCard, init );    
+            }
+            else
+            {
+                init();
             }
         }
     }
@@ -136,11 +145,11 @@ function readCard()
     {
         if( tAnswers.readType === 'basic-card' )
         {
-            data.readBasicCards();
+            data.readBasicCards( init );
         }
         else
         {
-            data.readClozeCards();
+            data.readClozeCards( init );
         }
     }
 }

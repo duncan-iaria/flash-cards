@@ -13,38 +13,38 @@ dataService.log = function( tMessage )
     console.log( tMessage );
 }
 
-dataService.readBasicCards = function()
+dataService.readBasicCards = function( tCallback )
 {
-    readData( basicFilePath );
+    readData( basicFilePath, tCallback );
 }
 
-dataService.readClozeCards = function()
+dataService.readClozeCards = function( tCallback )
 {
-    readData( clozeFilePath );
+    readData( clozeFilePath, tCallback );
 }
 
-dataService.writeBasicCards = function( tCard )
+dataService.writeBasicCards = function( tCard, tCallback )
 {
     basicCardData.push( tCard );
 
     let tempCardData = JSON.stringify( basicCardData, null, '\t' );
 
-    writeData( basicFilePath, tempCardData );
+    writeData( basicFilePath, tempCardData, tCallback );
 }
 
-dataService.writeClozeCards = function( tCard )
+dataService.writeClozeCards = function( tCard, tCallback )
 {
     clozeCardData.push( tCard );
 
     let tempCardData = JSON.stringify( clozeCardData, null, '\t' );
     
-    writeData( clozeFilePath, tempCardData );
+    writeData( clozeFilePath, tempCardData, tCallback );
 }
 
 //======================
 // PRIVATE FUNCTIONS
 //======================
-function writeData( tPath, tData )
+function writeData( tPath, tData, tCallback )
 {
     fs.writeFile( tPath, tData, onWriteComplete );
 
@@ -56,12 +56,17 @@ function writeData( tPath, tData )
         }
         else
         {
-            dataService.log( '\nwriting card complete!' );
+            dataService.log( '\nwriting card complete!\n' );
+        }
+
+        if( tCallback != null )
+        {
+            tCallback();
         }
     }
 }
 
-function readData( tPath )
+function readData( tPath, tCallback )
 {
     fs.readFile( tPath, 'utf8', onReadComplete );
 
@@ -74,7 +79,11 @@ function readData( tPath )
         else
         {
             dataService.log( tData );
-            return tData;
+        }
+
+        if( tCallback != null )
+        {
+            tCallback();
         }
     }
 }

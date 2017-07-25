@@ -13,7 +13,7 @@ ClozeCard.prototype.getPartialText = function()
 
     if( tempPartial == this.fullText )
     {
-        console.log( "no answer found in the full text" );
+        console.log( "\nno answer found in the full text - did not write to file\n" );
         return null;
     }
 
